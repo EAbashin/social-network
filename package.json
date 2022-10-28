@@ -1,6 +1,7 @@
 {
   "name": "social",
   "version": "0.1.0",
+  "homepage": "https://eabashin.github.io/social-network",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.2.0",
+    "gh-pages": "^4.0.0",
     "react-test-renderer": "^18.2.0"
   }
 }
