@@ -1,0 +1,31 @@
+.nav {
+    grid-area: nav;
+    background-color: rgb(220, 220, 220);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(150, 150, 150);
+    padding: 20px;
+}
+.menu {
+    margin: 0;
+    padding: 0;
+}
+.item {
+    display: block;
+    list-style: none;
+    transition: .3s all;
+}
+.item:hover {
+    transform: scale(1.02);
+}
+.item:active {
+    transform: scale(.98);
+}
+.item:last-child {
+    margin-top: 50px;
+}
+.active {
+    color: red;
+    transform: scale(1.02);
+    font-weight: bolder;
+    text-shadow: 5px 5px 5px rgb(150, 150, 150);
+}

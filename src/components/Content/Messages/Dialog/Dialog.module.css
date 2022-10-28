@@ -1,0 +1,11 @@
+.dialogs {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(150, 150, 150);
+    padding: 20px 20px 20px 30px;
+    margin-bottom: 0;
+}
+.dialog a {
+    font-weight: bold;
+    font-size: 1rem;
+}

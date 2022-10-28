@@ -1,0 +1,16 @@
+.friends {
+    margin-top: 50px;
+}
+.title {
+    text-align: center;
+}
+.logo_wrapper {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.wrapper {
+    display: flex;
+    margin: 10px auto 0 auto;
+    justify-content: space-between;
+}

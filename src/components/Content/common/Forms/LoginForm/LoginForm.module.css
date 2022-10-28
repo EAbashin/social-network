@@ -1,0 +1,97 @@
+.form {
+    display: block;
+    margin: 270px auto 0 auto;
+    width: 480px;
+    min-height: 358px;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 25px;
+    color: #8FFF00;
+    margin: 0 0 16px 16px;
+}
+
+.input {
+    display: block;
+    width: 480px;
+    height: 57px;
+    left: 720px;
+    top: 370px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    margin-bottom: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+}
+
+.input:focus {
+    background: rgba(255, 255, 255);
+    color: black;
+}
+
+.inputError {
+    background: #ef6666;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 460px;
+    height: 67px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 87px 0 0 16px;
+}
+.checkbox_input_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkbox_input {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+span {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FFFFFF;
+    margin-left: 16px;
+    cursor: default;
+}
+.btn {
+    width: 128px;
+    height: 57px;
+    background: #8FFF00;
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+[disabled] {
+     opacity: 0.6;
+     cursor: not-allowed;
+ }

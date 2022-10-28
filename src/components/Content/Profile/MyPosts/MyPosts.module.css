@@ -1,0 +1,28 @@
+.post {
+    margin-top: 20px;
+    display: flex;
+}
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(150, 150, 150);
+    margin-right: 20px;
+    object-fit:cover;
+    border: 1px solid rgb(220, 220, 220);
+    transition: .3s all;
+    cursor: pointer;
+}
+.avatar:hover {
+    transform: scale(1.02);
+}
+.avatar:active {
+    transform: scale(.98);
+}
+.text {
+    display: inline-block;
+    font-size: 20px;
+}
+.like {
+    float: right;
+}

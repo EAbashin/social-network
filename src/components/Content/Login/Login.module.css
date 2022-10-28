@@ -1,0 +1,65 @@
+.wrapper {
+    position: fixed;
+    background: url(../../../assets/img/login_bg.jpg) center center no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.header {
+    position: absolute;
+    width: 208px;
+    height: 64px;
+    left: -100px;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 0 208px;
+    z-index: 1;
+}
+
+.logo {
+    width: 64px;
+    height: 64px;
+}
+
+.title {
+    width: 122px;
+    height: 40px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 39px;
+    color: #8FFF00;
+}
+
+.subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 480px;
+    height: 25px;
+    margin: 35px auto 0 auto;
+}
+
+.subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+.active {
+    color: #FFFFFF;
+    font-weight: 700;
+}
