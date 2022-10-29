@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Component, Suspense} from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import Preloader from "./components/Content/common/Preloader/Preloader";
 import NavbarContainer from './components/Navbar/NavbarContainer';
@@ -25,7 +25,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <BrowserRouter>
+                <HashRouter basemname={`/${process.env.PUBLIC_URL}`}>
                     <HeaderContainer/>
                     <div className='app_wrapper'>
                         <NavbarContainer store={this.props.store}/>
@@ -48,7 +48,7 @@ class App extends Component {
                             </div>
                         </Suspense>
                     </div>
-                </BrowserRouter>
+                </HashRouter>
             </Provider>
         );
     }
