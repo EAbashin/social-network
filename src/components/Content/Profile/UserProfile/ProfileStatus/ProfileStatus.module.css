@@ -1,3 +1,6 @@
+.wrapper {
+    display: inline-block;
+}
 .logo_wrapper {
     display: block;
 }

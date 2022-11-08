@@ -1,0 +1,119 @@
+.form {
+    display: block;
+    margin: 0;
+    width: 100%;
+    /*min-height: 358px;*/
+}
+.wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 25px;
+    margin: 0 5px 0 0;
+}
+
+.input {
+    display: block;
+    width: 480px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+}
+
+.input:focus {
+    background: rgba(255, 255, 255);
+    color: black;
+}
+
+.error {
+    color: red;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 460px;
+    height: 67px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 87px 0 0 16px;
+}
+.checkbox_input_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 450px;
+    margin-bottom: 20px;
+}
+.checkbox_input {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+span {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 25px;
+    /*color: #FFFFFF;*/
+    margin-right: 5px;
+    cursor: default;
+}
+.btn {
+    width: 128px;
+    height: 57px;
+    background: #8FFF00;
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 30px;
+}
+[disabled] {
+     opacity: 0.6;
+     cursor: not-allowed;
+ }
+.wrapperTextarea {
+    align-items: start;
+    height: 90px;
+}
+textarea {
+    display: block;
+    width: 480px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    margin-bottom: 20px;
+}

@@ -1,27 +1,47 @@
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userIsNotPhoto from '../../../../assets/img/user.png';
-import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
+import {useState} from "react";
+import ProfileDataForm from "../../common/Forms/ProfileDataForm/ProfileDataForm";
+import ProfileData from "./ProfileData/ProfileData";
 
-const ProfileInfo = (props) => {
-    if (!props.userProfile) {
+const
+    ProfileInfo = (props) => {
+        const [editMode, setEditMode] = useState(false);
+
+        if (!props.userProfile) {
+            return (
+                <Preloader isFetching={true}/>
+            )
+        }
+
+        const
+            onMainPhotoSelected = (e) => {
+                if (e.target.files.length) {
+                    props.savePhotoThunkCreator(e.target.files[0])
+                }
+            };
+
         return (
-            <Preloader isFetching={true}/>
-        )
-    }
-    return (
-        <div className={s.wrapper}>
-            <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userIsNotPhoto}
-                 alt="avatar" className={s.avatar}/>
-            <div className={s.description}>
-                <h3 className={s.fullName}>{props.userProfile.fullName}</h3>
-                <ProfileStatusWithHooks status={props.status}
-                               updateStatusThunkCreator={props.updateStatusThunkCreator}
-                />
-                <p className={s.text}>{props.userProfile.aboutMe}</p>
+            <div className={s.wrapper}>
+                <div className={s.avatarWrapper}>
+                    <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userIsNotPhoto}
+                         alt="avatar" className={s.avatar}/>
+                    {props.isOwner &&
+                        <label className={s.fileLabel} title={'Change photo'}>
+                            <input type={'file'} accept={'.jpg, .jpeg, .png'} onChange={onMainPhotoSelected} className={s.fileInput}/>
+                            ...
+                        </label>}
+                    {props.isOwner &&
+                        <span className={s.btnEditProfile}
+                              onClick={() => setEditMode(!editMode)}>{editMode ? 'Close editor' : 'Edit profile'}</span>}
+                </div>
+                {
+                    editMode ? <ProfileDataForm {...props} setEditMode={setEditMode}/> : <ProfileData {...props}/>
+                }
             </div>
-        </div>
-    )
-};
+
+        )
+    };
 
 export default ProfileInfo;

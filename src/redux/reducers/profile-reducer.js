@@ -6,7 +6,9 @@ const
     TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
     SET_STATUS = 'SET_STATUS',
-    UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+    SAVE_PROFILE = 'SAVE_PROFILE',
+    UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT',
+    SAVE_PHOTO = 'SAVE_PHOTO';
 
 const initialState = {
     posts: [
@@ -64,6 +66,12 @@ const profileReducer = (state = initialState, action) => {
                 userProfile: action.userProfile
             };
         }
+        case SAVE_PROFILE: {
+            return {
+                ...state,
+                userProfile: {...action.userProfile}
+            };
+        }
         case SET_STATUS: {
             return {
                 ...state,
@@ -74,6 +82,12 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            };
+        }
+        case SAVE_PHOTO: {
+            return {
+                ...state,
+                userProfile: {...state.userProfile, photos: action.photos}
             };
         }
         default: {
@@ -88,13 +102,22 @@ export const
     updateNewValueText = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text}),
     toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching}),
     setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile: userProfile}),
-    setStatus = (status) => ({type: SET_STATUS, status: status});
+    setStatus = (status) => ({type: SET_STATUS, status: status}),
+    saveProfile = (profile) => ({type: SAVE_PROFILE, userProfile: profile}),
+    savePhoto = (photos) => ({type: SAVE_PHOTO, photos: photos});
 
 export const
     getProfileThunkCreator = (userId) => async (dispatch) => {
         const response = await profileAPI.getProfile(userId);
         dispatch(setUserProfile(response));
         dispatch(toggleIsFetching(false));
+    },
+    updateProfileThunkCreator = (profile) => async (dispatch) => {
+        const response = await profileAPI.putProfile(profile);
+        if (response.resultCode === 0) {
+            dispatch(saveProfile(profile));
+        }
+        return response;
     },
     getStatusThunkCreator = (userId) => async (dispatch) => {
         const response = await profileAPI.getStatus(userId);
@@ -104,6 +127,12 @@ export const
         const response = await profileAPI.putStatus(status);
         if (response.resultCode === 0) {
             dispatch(setStatus(status));
+        }
+    },
+    savePhotoThunkCreator = (file) => async (dispatch) => {
+        const response = await profileAPI.putPhoto(file);
+        if (response.resultCode === 0) {
+            dispatch(savePhoto(response.data.photos));
         }
     };
 

@@ -5,9 +5,10 @@ import {
     getProfileThunkCreator,
     getStatusThunkCreator,
     updateStatusThunkCreator,
+    savePhotoThunkCreator,
     setUserProfile,
     toggleIsFetching,
-    updateNewValueText,
+    updateNewValueText, updateProfileThunkCreator,
 } from "../../../redux/reducers/profile-reducer";
 import React from "react";
 import {useParams} from "react-router-dom";
@@ -22,7 +23,7 @@ const withRouter = (WrappedComponent) => props => {
 };
 
 class ProfilePageAPIComponent extends React.Component {
-    componentDidMount() {
+    refreshProfile() {
         this.props.toggleIsFetching(true);
         let userId = this.props.params.userId;
         if (!userId) {
@@ -32,10 +33,21 @@ class ProfilePageAPIComponent extends React.Component {
         this.props.getStatusThunkCreator(userId);
     }
 
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.params.userId !== prevProps.params.userId) {
+            this.refreshProfile();
+        }
+    }
+
     render() {
         return (
             <div>
-                <Profile {...this.props}/>
+                <Profile {...this.props}
+                         isOwner={!this.props.params.userId}/>
             </div>
         )
     }
@@ -50,12 +62,14 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
     updateNewValueText,
-    addPost: addPost,
+    addPost,
     toggleIsFetching,
     setUserProfile,
     getProfileThunkCreator,
     getStatusThunkCreator,
     updateStatusThunkCreator,
+    savePhotoThunkCreator,
+    updateProfileThunkCreator
 };
 
 const ProfileContainer = compose(

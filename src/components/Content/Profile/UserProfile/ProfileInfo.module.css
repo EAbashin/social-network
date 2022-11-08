@@ -1,9 +1,15 @@
-.logo_wrapper {
-    position: relative;
+.wrapper {
     display: flex;
-    margin: 0px 0 20px 0;
+}
+.logo_wrapper {
+    margin: 0 0 20px 0;
+}
+.avatarWrapper {
+    position: relative;
+    margin-right: 20px;
 }
 .avatar {
+    position: relative;
     width: 200px;
     height: 200px;
     border-radius: 5px;
@@ -11,17 +17,46 @@
     margin-right: 20px;
     object-fit:cover;
     border: 1px solid rgb(220, 220, 220);
-    transition: .3s all;
+}
+.btnEditProfile {
+    display: block;
+    text-align: center;
+    margin: 10px 0 20px 0;
     cursor: pointer;
+    transition: .3s all;
+}
+.btnEditProfile:hover {
+    transform: scale(.99);
+    color: gray;
+}
+.btnEditProfile:active {
+    transform: scale(1);
+    color: black;
 }
 .description {
-    width: 100%;
+    display: inline-block;
 }
-.avatar:hover {
-    transform: scale(1.02);
+.fileInput {
+    display: none;
 }
-.avatar:active {
-    transform: scale(.98);
+.fileLabel {
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: .5;
+    top: 0;
+    left: 150px;
+    transition: .3s all;
+}
+.fileLabel:hover {
+    transform: scale(1.05);
+    color: red;
+}
+.fileLabel:active {
+    transform: scale(.95);
+    color: black;
 }
 .text {
     font-size: 20px;
