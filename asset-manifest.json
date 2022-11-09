@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/social-network/static/css/main.6dc4dd3e.css",
-    "main.js": "/social-network/static/js/main.378eac82.js",
-    "static/css/701.c23ca702.chunk.css": "/social-network/static/css/701.c23ca702.chunk.css",
-    "static/js/701.420fee62.chunk.js": "/social-network/static/js/701.420fee62.chunk.js",
+    "main.js": "/social-network/static/js/main.5f2ac001.js",
+    "static/css/701.503ffaaf.chunk.css": "/social-network/static/css/701.503ffaaf.chunk.css",
+    "static/js/701.74c5a242.chunk.js": "/social-network/static/js/701.74c5a242.chunk.js",
     "static/css/790.2b2332eb.chunk.css": "/social-network/static/css/790.2b2332eb.chunk.css",
     "static/js/790.47a2f294.chunk.js": "/social-network/static/js/790.47a2f294.chunk.js",
     "static/css/526.874537fd.chunk.css": "/social-network/static/css/526.874537fd.chunk.css",
@@ -20,9 +20,9 @@
     "static/media/loading.svg": "/social-network/static/media/loading.a4f398b70bf9742c0974c7d143e1e21c.svg",
     "index.html": "/social-network/index.html",
     "main.6dc4dd3e.css.map": "/social-network/static/css/main.6dc4dd3e.css.map",
-    "main.378eac82.js.map": "/social-network/static/js/main.378eac82.js.map",
-    "701.c23ca702.chunk.css.map": "/social-network/static/css/701.c23ca702.chunk.css.map",
-    "701.420fee62.chunk.js.map": "/social-network/static/js/701.420fee62.chunk.js.map",
+    "main.5f2ac001.js.map": "/social-network/static/js/main.5f2ac001.js.map",
+    "701.503ffaaf.chunk.css.map": "/social-network/static/css/701.503ffaaf.chunk.css.map",
+    "701.74c5a242.chunk.js.map": "/social-network/static/js/701.74c5a242.chunk.js.map",
     "790.2b2332eb.chunk.css.map": "/social-network/static/css/790.2b2332eb.chunk.css.map",
     "790.47a2f294.chunk.js.map": "/social-network/static/js/790.47a2f294.chunk.js.map",
     "526.874537fd.chunk.css.map": "/social-network/static/css/526.874537fd.chunk.css.map",
@@ -37,6 +37,6 @@
   },
   "entrypoints": [
     "static/css/main.6dc4dd3e.css",
-    "static/js/main.378eac82.js"
+    "static/js/main.5f2ac001.js"
   ]
 }
