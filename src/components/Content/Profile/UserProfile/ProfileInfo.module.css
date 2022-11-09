@@ -24,6 +24,7 @@
     margin: 10px 0 20px 0;
     cursor: pointer;
     transition: .3s all;
+    color: black;
 }
 .btnEditProfile:hover {
     transform: scale(.99);
