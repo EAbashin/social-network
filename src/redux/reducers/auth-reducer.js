@@ -59,7 +59,7 @@ export const
     toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching}),
     delIsAuth = () => ({type: DEL_IS_AUTH}),
     setCaptcha = (data) => ({type: SET_CAPTCHA, data: data}),
-    delCaptcha = () => ({type: SET_CAPTCHA});
+    delCaptcha = () => ({type: DEL_CAPTCHA});
 
 export const
     getAuthDataThunkCreator = () => async (dispatch) => {

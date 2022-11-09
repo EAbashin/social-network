@@ -6,7 +6,7 @@ import {FORM_ERROR} from "final-form";
 const LoginForm = (props) => {
     const onSubmit = async (e) => {
         const data = await props.postAuthLoginThunkCreator(e.email, e.password, e.rememberMe, e.captcha);
-        if (data.messages) {
+        if (data) {
             return { [FORM_ERROR]: data.messages[0] }
         }
     };
