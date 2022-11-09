@@ -6,6 +6,7 @@ import React from "react";
 
 const Login = (props) => {
     if (props.isAuth) return <Navigate to="/profile"/>
+
     return (
         <div className={s.wrapper}>
             <div className={s.header}>
@@ -16,7 +17,7 @@ const Login = (props) => {
                 <h2 className={s.subtitle + ' ' + s.active}>Login</h2>
                 <h2 className={s.subtitle}>Registration</h2>
             </div>
-            <LoginForm postAuthLoginThunkCreator={props.postAuthLoginThunkCreator}/>
+            <LoginForm postAuthLoginThunkCreator={props.postAuthLoginThunkCreator} captcha={props.captcha}/>
         </div>
     )
 };

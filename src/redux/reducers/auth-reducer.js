@@ -1,17 +1,20 @@
-import {authAPI, profileAPI} from "../../api/api";
+import {authAPI, profileAPI, securityAPI} from "../../api/api";
 import {setUserProfile} from "./profile-reducer";
 
 const
     SET_AUTH_USER_DATA = 'auth/SET_AUTH_USER_DATA',
     TOGGLE_IS_FETCHING = 'auth/TOGGLE_IS_FETCHING',
-    DEL_IS_AUTH = 'auth/DEL_IS_AUTH';
+    DEL_IS_AUTH = 'auth/DEL_IS_AUTH',
+    SET_CAPTCHA = 'SET_CAPTCHA',
+    DEL_CAPTCHA = 'DEL_CAPTCHA';
 
 const initialState = {
     id: null,
     email: null,
     login: null,
     isAuth: false,
-    isFetching: false
+    isFetching: false,
+    captcha: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -28,6 +31,18 @@ const authReducer = (state = initialState, action) => {
                 isAuth: false,
             };
         }
+        case SET_CAPTCHA: {
+            return {
+                ...state,
+                captcha: action.data.url
+            };
+        }
+        case DEL_CAPTCHA: {
+            return {
+                ...state,
+                captcha: null
+            };
+        }
         case TOGGLE_IS_FETCHING: {
             return {
                 ...state,
@@ -42,7 +57,9 @@ const authReducer = (state = initialState, action) => {
 export const
     setAuthUserData = (data) => ({type: SET_AUTH_USER_DATA, data: data}),
     toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching}),
-    delIsAuth = () => ({type: DEL_IS_AUTH});
+    delIsAuth = () => ({type: DEL_IS_AUTH}),
+    setCaptcha = (data) => ({type: SET_CAPTCHA, data: data}),
+    delCaptcha = () => ({type: SET_CAPTCHA});
 
 export const
     getAuthDataThunkCreator = () => async (dispatch) => {
@@ -50,6 +67,7 @@ export const
         const data = await authAPI.getAuthData();
         if (data.resultCode === 0) {
             dispatch(setAuthUserData(data.data));
+            dispatch(delCaptcha());
             profileAPI.getProfile(data.data.id).then(data => {
                 dispatch(setUserProfile(data));
                 dispatch(toggleIsFetching(false));
@@ -58,14 +76,19 @@ export const
             dispatch(toggleIsFetching(false));
         }
     },
-    postAuthLoginThunkCreator = (email, password, rememberMe) => {
+    postAuthLoginThunkCreator = (email, password, rememberMe, captcha) => {
         return async (dispatch) => {
             dispatch(toggleIsFetching(true));
-            const data = await authAPI.postAuthLogin(email, password, rememberMe);
+            const data = await authAPI.postAuthLogin(email, password, rememberMe, captcha);
             if (data.resultCode === 0) {
                 dispatch(getAuthDataThunkCreator());
+            } else if (data.resultCode === 10) {
+                dispatch(getCaptchaThunkCreator())
+                dispatch(toggleIsFetching(false));
+                return data;
             } else {
                 dispatch(toggleIsFetching(false));
+                return data;
             }
         };
     },
@@ -80,6 +103,14 @@ export const
             } else {
                 dispatch(toggleIsFetching(false));
             }
+        };
+    },
+    getCaptchaThunkCreator = () => {
+        return async (dispatch) => {
+            dispatch(toggleIsFetching(true));
+            const data = await securityAPI.getCaptcha();
+            dispatch(setCaptcha(data));
+            dispatch(toggleIsFetching(false));
         };
     };
 

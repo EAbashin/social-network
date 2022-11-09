@@ -1,11 +1,12 @@
 import {connect} from "react-redux";
-import {postAuthLoginThunkCreator} from "../../../redux/reducers/auth-reducer";
+import {getCaptchaThunkCreator, postAuthLoginThunkCreator} from "../../../redux/reducers/auth-reducer";
 import Login from "./Login";
 
 const
     mapStateToProps = (state) => {
         return {
-            isAuth: state.auth.isAuth
+            isAuth: state.auth.isAuth,
+            captcha: state.auth.captcha
         };
     },
     mapDispatchToProps = {

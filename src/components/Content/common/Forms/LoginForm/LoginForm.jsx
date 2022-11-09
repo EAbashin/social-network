@@ -1,11 +1,14 @@
 import {Field, Form} from "react-final-form";
 import s from "./LoginForm.module.css";
 import {required} from "../../../../utilities/validators/validators";
+import {FORM_ERROR} from "final-form";
 
-
-const LoginForm = ({postAuthLoginThunkCreator}) => {
-    const onSubmit = (e) => {
-        postAuthLoginThunkCreator(e.email, e.password, e.rememberMe);
+const LoginForm = (props) => {
+    const onSubmit = async (e) => {
+        const data = await props.postAuthLoginThunkCreator(e.email, e.password, e.rememberMe, e.captcha);
+        if (data.messages) {
+            return { [FORM_ERROR]: data.messages[0] }
+        }
     };
     return (
         <Form
@@ -13,9 +16,10 @@ const LoginForm = ({postAuthLoginThunkCreator}) => {
             initialValues={{
                 email: '',
                 password: '',
-                rememberMe: false
+                rememberMe: false,
+                captcha: ''
             }}
-            render={({handleSubmit, submitting, pristine}) => (
+            render={({handleSubmit, submitting, pristine, submitError}) => (
                 <form onSubmit={handleSubmit} className={s.form} action="src/components/Content/common/Forms/LoginForm/LoginForm">
                     <Field
                         name="email"
@@ -47,6 +51,26 @@ const LoginForm = ({postAuthLoginThunkCreator}) => {
                         }}
                     </Field>
 
+                    {props.captcha ?
+                        <Field
+                            name="captcha"
+                            validate={required}>
+                            {({input, meta}) => {
+                                const hasError = meta.error && meta.touched;
+                                return (
+                                    <div>
+                                        <label className={s.label}>Captcha</label>
+                                        <div className={s.captchaWrapper}>
+                                            <input className={`${s.input} ${s.captchaInput} ${hasError ? s.inputError : ''}`} {...input}
+                                                   type="text"
+                                                   placeholder="captcha"/>
+                                            <img src={props.captcha} alt="captcha" className={s.captcha}/>
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        </Field> : ''}
+
                     <div className={s.checkbox}>
                         <div className={s.checkbox_input_wrapper}>
                             <Field name="rememberMe" component="input" type="checkbox" className={s.checkbox_input}/>
@@ -59,6 +83,7 @@ const LoginForm = ({postAuthLoginThunkCreator}) => {
                             login
                         </button>
                     </div>
+                    {submitError && <div className={s.error}>{submitError}</div>}
                 </form>
             )}
         />
