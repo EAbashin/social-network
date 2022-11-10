@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {getCaptchaThunkCreator, postAuthLoginThunkCreator} from "../../../redux/reducers/auth-reducer";
+import {postAuthLoginThunkCreator} from "../../../redux/reducers/auth-reducer";
 import Login from "./Login";
 
 const

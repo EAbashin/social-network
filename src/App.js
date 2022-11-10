@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Component, Suspense} from "react";
-import {HashRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import Preloader from "./components/Content/common/Preloader/Preloader";
 import NavbarContainer from './components/Navbar/NavbarContainer';
@@ -34,7 +34,7 @@ class App extends Component {
                                 {!this.props.isInitialized
                                     ? <Preloader/>
                                     : <Routes>
-                                        <Route path='/' element={<ProfileContainer/>}/>
+                                        <Route exact path='/' element={<Navigate to="/profile"/>}/>
                                         <Route path="/profile" element={<ProfileContainer/>}>
                                             <Route path=":userId" element={<ProfileContainer/>}/>
                                         </Route>
