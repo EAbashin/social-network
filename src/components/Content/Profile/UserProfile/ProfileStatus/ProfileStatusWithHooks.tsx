@@ -1,7 +1,14 @@
 import s from './ProfileStatus.module.css';
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
+import React from 'react';
 
-const ProfileStatusWithHooks = (props) => {
+type PropsType = {
+    status: string
+    isOwner: boolean
+    updateStatusThunkCreator: (status: string) => void
+}
+
+const ProfileStatusWithHooks = (props: PropsType) => {
     const
         [editMode, setEditMode] = useState(false),
         [status, setStatus] = useState(props.status);
@@ -15,7 +22,7 @@ const ProfileStatusWithHooks = (props) => {
             props.updateStatusThunkCreator(status);
             setEditMode(false);
         },
-        onStatusChange = (e) => {
+        onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
             setStatus(e.currentTarget.value);
         };
     return (

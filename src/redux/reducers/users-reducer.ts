@@ -1,4 +1,6 @@
+// @ts-ignore
 import {usersAPI} from "../../api/api";
+import {UserType} from "../../types/types";
 
 const
     TOGGLE_FOLLOW = 'user/TOGGLE_FOLLOW',
@@ -11,16 +13,17 @@ const
     ADD_USERS = 'user/ADD_USERS';
 
 const initialState = {
-    users: [],
+    users: [] as Array<UserType>,
     pageSize: 5,
     portionSize: 10,
     totalUsersCount: 1,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [],
+    followingInProgress: [] as Array<number> // Array of users ids
 };
+type InitialStateType = typeof initialState;
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case TOGGLE_FOLLOW: {
             return {
@@ -78,20 +81,52 @@ const usersReducer = (state = initialState, action) => {
             return state;
     }
 };
+type ToggleFollowType = {
+    type: typeof TOGGLE_FOLLOW
+    userId: number
+};
+type ToggleIsFetchingType = {
+    type: typeof TOGGLE_IS_FETCHING
+    isFetching: boolean
+};
+type ToggleFollowingProgressType = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    isFollowing: boolean
+    userId: number
+};
+type SetUsersType = {
+    type: typeof SET_USERS
+    users: Array<UserType>
+};
+type AddUsersType = {
+    type: typeof ADD_USERS
+    users: Array<UserType>
+};
+type SetTotalUsersCountType = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    totalUsersCount: number
+};
+type UpCurrentPageType = {
+    type: typeof UP_CURRENT_PAGE
+    currentPage: number
+};
+type SetCurrentPageType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+};
+export const
+    toggleFollow = (userId: number): ToggleFollowType => ({type: TOGGLE_FOLLOW, userId: userId}),
+    toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching}),
+    toggleFollowingProgress = (isFollowing: boolean, userId: number): ToggleFollowingProgressType => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing: isFollowing, userId: userId}),
+    setUsers = (users: Array<UserType>): SetUsersType => ({type: SET_USERS, users: users}),
+    addUsers = (users: Array<UserType>): AddUsersType => ({type: ADD_USERS, users: users}),
+    setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountType => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount}),
+    upCurrentPage = (currentPage: number): UpCurrentPageType => ({type: UP_CURRENT_PAGE, currentPage: currentPage}),
+    setCurrentPage = (currentPage: number): SetCurrentPageType => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 
 export const
-    toggleFollow = (userId) => ({type: TOGGLE_FOLLOW, userId: userId}),
-    toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching}),
-    toggleFollowingProgress = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing: isFollowing, userId: userId}),
-    setUsers = (users) => ({type: SET_USERS, users: users}),
-    addUsers = (users) => ({type: ADD_USERS, users: users}),
-    setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount}),
-    upCurrentPage = (currentPage) => ({type: UP_CURRENT_PAGE, currentPage: currentPage}),
-    setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
-
-export const
-    getUsersThunkCreator = (currentPage, pageSize, set_add, isSetTotalUsersCount) => {
-        return async (dispatch) => {
+    getUsersThunkCreator = (currentPage: number, pageSize: number, set_add: 'set' | 'add', isSetTotalUsersCount: boolean) => {
+        return async (dispatch: any) => {
             dispatch(toggleIsFetching(true));
             const data = await usersAPI.getUsers(currentPage, pageSize);
             switch (set_add) {
@@ -102,7 +137,7 @@ export const
                     dispatch(addUsers(data.items));
                     break;
                 default:
-                    console.log('Error set/add-user parameters!');
+                    console.log('Error set/add-user parameters in user-reducer!');
             }
             if (isSetTotalUsersCount) {
                 dispatch(setTotalUsersCount(data.totalCount));
@@ -110,8 +145,8 @@ export const
             dispatch(toggleIsFetching(false));
         };
     },
-    followThunkCreator = (followed, userId) => {
-        return async (dispatch) => {
+    followThunkCreator = (followed: boolean, userId: number) => {
+        return async (dispatch: any) => {
             if (!followed) {
                 dispatch(toggleFollowingProgress(true, userId));
                 const data = await usersAPI.postFollow(userId);

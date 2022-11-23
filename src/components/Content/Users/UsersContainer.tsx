@@ -17,8 +17,26 @@ import {
     getTotalUsersCount,
     getUsersSuperSelector
 } from "../../../redux/reducers/users-selectors";
+import {UserType} from "../../../types/types";
+import {StateType} from "../../../redux/redux-store";
 
-class UsersAPIComponent extends React.Component {
+type PropsType = {
+    users: Array<UserType>
+    followingInProgress: Array<number>
+    totalUsersCount: number
+    currentPage: number
+    pageSize: number
+    portionSize: number
+    isFetching: boolean
+    pageNumber: number
+    onShowMoreUsers:  () => void
+    onPageChange: (pageNumber: number) => void
+    upCurrentPage: (currentPage: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    followThunkCreator: (followed: boolean, id: number) => void
+    getUsersThunkCreator: (currentPage: number, pageSize: number, set_add: 'set' | 'add', isSetTotalUsersCount: boolean) => void
+};
+class UsersAPIComponent extends React.Component<PropsType> {
     componentDidMount = () => {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize, 'set', true);
     }
@@ -26,7 +44,7 @@ class UsersAPIComponent extends React.Component {
         this.props.getUsersThunkCreator(this.props.currentPage + 1, this.props.pageSize, 'add', false);
         this.props.upCurrentPage(this.props.currentPage);
     }
-    onPageChange = (pageNumber) => {
+    onPageChange = (pageNumber: number) => {
         this.props.getUsersThunkCreator(pageNumber, this.props.pageSize, 'set', false);
         this.props.setCurrentPage(pageNumber);
     }
@@ -52,7 +70,7 @@ class UsersAPIComponent extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StateType) => {
     return {
         users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),

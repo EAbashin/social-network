@@ -1,13 +1,19 @@
 import {getAuthDataThunkCreator} from "./auth-reducer";
 
-const
-    TOGGLE_INITIALIZATION = 'app/TOGGLE_INITIALIZATION';
+const TOGGLE_INITIALIZATION = 'app/TOGGLE_INITIALIZATION';
 
-const initialState = {
+type InitialStateType = {
+    isInitialized: boolean
+};
+const initialState: InitialStateType = {
     isInitialized: false
 };
 
-const appReducer = (state = initialState, action) => {
+type AppReducerActionType = {
+    type: typeof TOGGLE_INITIALIZATION
+    isInitialized: boolean
+};
+const appReducer = (state = initialState, action: AppReducerActionType):InitialStateType => {
     switch (action.type) {
         case TOGGLE_INITIALIZATION: {
             return {
@@ -20,10 +26,10 @@ const appReducer = (state = initialState, action) => {
     }
 };
 
-export const toggleInitialization = (isInitialized) => ({type: TOGGLE_INITIALIZATION, isInitialized: isInitialized});
+export const toggleInitialization = (isInitialized: boolean):AppReducerActionType => ({type: TOGGLE_INITIALIZATION, isInitialized: isInitialized});
 
 export const toggleInitializationThunkCreator = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         const promise = dispatch(getAuthDataThunkCreator());
         promise.then(() => dispatch(toggleInitialization(true)));
     };

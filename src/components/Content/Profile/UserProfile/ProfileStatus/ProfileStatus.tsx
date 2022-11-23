@@ -1,7 +1,17 @@
 import s from './ProfileStatus.module.css';
-import {Component} from "react";
+import {ChangeEvent, Component} from "react";
+import React from 'react';
 
-class ProfileStatus extends Component {
+type PropsType = {
+    status: string
+    isOwner: boolean
+    updateStatusThunkCreator: (status: string) => void
+}
+type LocalStateType = {
+    editMode: boolean
+    status: string
+}
+class ProfileStatus extends Component<PropsType, LocalStateType> {
     state = {
         editMode: false,
         status: this.props.status
@@ -12,7 +22,7 @@ class ProfileStatus extends Component {
             editMode: true
         });
     }
-    onStatusChange = (e) => {
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value
         });
@@ -24,7 +34,7 @@ class ProfileStatus extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType, prevState: LocalStateType) {
         if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status
