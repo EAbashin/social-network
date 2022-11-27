@@ -1,8 +1,23 @@
 import ProfileInfo from "./UserProfile/ProfileInfo";
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
+import {UserProfileType} from "../../../types/types";
+import {ProfilePageInitialStateType} from "../../../redux/reducers/profile-reducer";
 
-const Profile = (props) => {
+type PropsType = {
+    profilePage: ProfilePageInitialStateType
+    status: string
+    id: number
+    isOwner: boolean
+    getProfileThunkCreator: (userId: number) => void
+    getStatusThunkCreator: (userId: number) => void
+    toggleIsFetching: (isToggle: boolean) => void
+    savePhotoThunkCreator: (file: any) => void
+    updateStatusThunkCreator: (status: string) => void
+    updateProfileThunkCreator: (profile: UserProfileType) => void
+    addPost: (newPost: string) => void
+}
+const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <ProfileInfo userProfile={props.profilePage.userProfile}

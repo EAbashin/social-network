@@ -8,21 +8,39 @@ import {
     savePhotoThunkCreator,
     setUserProfile,
     toggleIsFetching,
-    updateNewValueText, updateProfileThunkCreator,
+    updateNewValueText, updateProfileThunkCreator, ProfilePageInitialStateType,
 } from "../../../redux/reducers/profile-reducer";
 import React from "react";
 import {useParams} from "react-router-dom";
 import withAuthRedirectComponent from "../../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {StateType} from "../../../redux/redux-store";
+import {UserProfileType} from "../../../types/types";
 
-const withRouter = (WrappedComponent) => props => {
+type ParamsType = {
+    userId: number
+}
+type PropsType = {
+    profilePage: ProfilePageInitialStateType
+    params: ParamsType
+    id: number
+    status: string
+    savePhotoThunkCreator: (file: any) => void
+    updateStatusThunkCreator: (status: string) => void
+    updateProfileThunkCreator: (profile: UserProfileType) => void
+    addPost: (newPost: string) => void
+    getProfileThunkCreator: (userId: number) => void
+    getStatusThunkCreator: (userId: number) => void
+    toggleIsFetching: (isToggle: boolean) => void
+}
+const withRouter = (WrappedComponent: any): React.FC<PropsType> => props => {
     const params = useParams();
     return (
         <WrappedComponent {...props} params={params}/>
     );
 };
 
-class ProfilePageAPIComponent extends React.Component {
+class ProfilePageAPIComponent extends React.Component<PropsType> {
     refreshProfile() {
         this.props.toggleIsFetching(true);
         let userId = this.props.params.userId;
@@ -37,7 +55,7 @@ class ProfilePageAPIComponent extends React.Component {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
         if (this.props.params.userId !== prevProps.params.userId) {
             this.refreshProfile();
         }
@@ -53,7 +71,7 @@ class ProfilePageAPIComponent extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StateType) => {
     return {
         profilePage: state.profilePage,
         status: state.profilePage.status,

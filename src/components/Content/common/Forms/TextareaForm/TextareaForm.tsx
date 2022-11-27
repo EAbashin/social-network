@@ -1,9 +1,17 @@
 import s from './TextAreaForm.module.css';
 import {Form, Field} from 'react-final-form';
 import {composeValidators, maxValue, required} from "../../../../utilities/validators/validators";
+import React from "react";
 
-const TextAreaForm = (props) => {
-    const onSubmit = (e) => {
+type TextAreaFormType = {
+    addBlock: (newBlock: string) => void
+    placeholder: string
+}
+const TextAreaForm: React.FC<TextAreaFormType> = (props) => {
+    type eType = {
+        newBlock: string
+    }
+    const onSubmit = (e: eType) => {
         props.addBlock(e.newBlock);
     };
     return (
@@ -18,7 +26,8 @@ const TextAreaForm = (props) => {
                             const hasError = meta.error && meta.touched && meta.error === `Max length is 98 symbols`;
                             return (
                                 <div className={s.form}>
-                                    <textarea className={`${s.textarea} ${hasError ? s.textareaError : ''}`} {...input} type="text" placeholder={props.placeholder}/>
+                                    <textarea className={`${s.textarea} ${hasError ? s.textareaError : ''}`} {...input}
+                                              placeholder={props.placeholder}/>
                                     {hasError && <span className={s.error}>{meta.error}</span>}
                                 </div>
                             )

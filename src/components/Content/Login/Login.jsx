@@ -18,6 +18,11 @@ const Login = (props) => {
                 <h2 className={s.subtitle}>Registration</h2>
             </div>
             <LoginForm postAuthLoginThunkCreator={props.postAuthLoginThunkCreator} captcha={props.captcha}/>
+            <div className={s.test}>
+                <h4>TEST ACCOUNT</h4>
+                <p>free@samuraijs.com</p>
+                <p>free</p>
+            </div>
         </div>
     )
 };

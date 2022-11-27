@@ -37,9 +37,9 @@ const initialState = {
     status: '',
     newPostText: null as null | string
 };
-type InitialStateType = typeof initialState;
+export type ProfilePageInitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: any):InitialStateType => {
+const profileReducer = (state = initialState, action: any):ProfilePageInitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let lastPostId = state.posts.length;

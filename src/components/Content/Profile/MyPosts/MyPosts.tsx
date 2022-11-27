@@ -2,7 +2,17 @@ import TextAreaForm from "../../common/Forms/TextareaForm/TextareaForm";
 import Post from "../Post/Post";
 import React from "react";
 
-const MyPosts = React.memo((props) => {
+type PostType = {
+    id: number
+    img: string
+    message: string
+    likesCount: number
+}
+export type MyPostType = {
+    posts: Array<PostType>
+    addPost: (newPost: string) => void
+}
+const MyPosts: React.FC<MyPostType> = React.memo((props) => {
     const postsElements = props.posts.map(p => <Post key={p.id} img={p.img} message={p.message} likesCount={p.likesCount}/>);
     return (
         <div>
